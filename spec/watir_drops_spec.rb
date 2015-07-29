@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe WatirDrops do
-  it 'has a version number' do
-    expect(WatirDrops::VERSION).not_to be nil
+  after(:all) do
+    WatirDrops::Session.instance.quit
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'starts browser' do
+    browser = PageObject.new.browser
+    expect(browser).to exist
   end
 end
