@@ -9,4 +9,10 @@ describe WatirDrops do
     browser = PageObject.new.browser
     expect(browser).to exist
   end
+
+  it 'navigates' do
+    test_page = TestPage.new
+    test_page.goto
+    expect(test_page.title).to eql "Watir-WebDriver Demo"
+  end
 end
