@@ -15,4 +15,11 @@ describe WatirDrops do
     test_page.goto
     expect(test_page.title).to eql "Watir-WebDriver Demo"
   end
+
+  it 'finds elements' do
+    test_page = TestPage.new
+    test_page.goto
+    expect(test_page.name).to exist
+  end
+
 end

@@ -7,6 +7,13 @@ module WatirDrops
           browser.goto url
         end
       end
+
+      def element(name, &block)
+        define_method(name) do |*args|
+          self.instance_exec(*args, &block)
+        end
+      end
+
     end
 
     attr_reader :browser
