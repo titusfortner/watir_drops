@@ -11,7 +11,7 @@ Create a class that represents a unique page or modal on your site and have it i
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/titusfortner/watir_drops.
+Bug reports and pull requests are welcome on [GitHub](https://github.com/titusfortner/watir_drops)
 
 
 ## License
