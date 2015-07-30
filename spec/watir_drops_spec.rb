@@ -22,4 +22,11 @@ describe WatirDrops do
     expect(test_page.name).to exist
   end
 
+  it 'fills out form default' do
+    TestPage.new.visit.submit_form
+
+    expect(ResultPage.new.message).to include('Thank you')
+  end
+
+
 end
