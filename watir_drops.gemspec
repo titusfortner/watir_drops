@@ -22,6 +22,6 @@ application information, allowing it to be decoupled from the tests}
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 0"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "watir-webdriver", "~> 0.8.0"
 end
