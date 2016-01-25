@@ -40,6 +40,7 @@ module WatirDrops
               watir_element.click
             # TODO - Email & Password types are not set to UserEditable in Watir
             when Watir::Input
+              watir_element.wd.clear
               watir_element.send_keys val
             else
               watir_element.click if val
