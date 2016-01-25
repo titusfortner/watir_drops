@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "watir_drops"
-  spec.version       = '0.3.0'
+  spec.version       = '0.3.1'
   spec.authors       = ["Titus Fortner"]
   spec.email         = ["titusfortner@gmail.com"]
 
