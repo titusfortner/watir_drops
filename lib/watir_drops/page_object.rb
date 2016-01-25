@@ -1,4 +1,4 @@
-require "active_support/inflector"
+require 'active_support/inflector'
 
 module WatirDrops
   class PageObject
@@ -21,13 +21,14 @@ module WatirDrops
 
         define_method(name.to_s.pluralize) do |*args|
           selector = self.instance_exec(*args, &block).instance_variable_get('@selector')
-          element_type = selector.delete :tag_name
+          element_type = selector.delete(:tag_name) || 'element'
           browser.send(element_type.pluralize, selector)
         end
 
 
         define_method("#{name}=") do |val|
           watir_element = self.instance_exec &block
+          watir_element.wait_until_present
           case watir_element
             when Watir::Radio
               watir_element.set if val
@@ -37,8 +38,11 @@ module WatirDrops
               watir_element.select val
             when Watir::Button
               watir_element.click
+            # TODO - Email & Password types are not set to UserEditable in Watir
+            when Watir::Input
+              watir_element.send_keys val
             else
-              watir_element.value = val
+              watir_element.click if val
           end
         end
 
