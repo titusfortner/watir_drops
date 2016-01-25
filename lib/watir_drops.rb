@@ -1,7 +1,6 @@
-require 'watir-webdriver'
+require 'watir_session'
+require 'require_all'
 
-require "watir_drops/version"
-require "watir_drops/session"
-require "watir_drops/page_object"
+require_all 'lib'
 
 include WatirDrops

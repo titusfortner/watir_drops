@@ -1,11 +1,8 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'watir_drops/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "watir_drops"
-  spec.version       = WatirDrops::VERSION
+  spec.version       = '0.3.0'
   spec.authors       = ["Titus Fortner"]
   spec.email         = ["titusfortner@gmail.com"]
 
@@ -23,5 +20,9 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
-  spec.add_development_dependency "watir-webdriver", "~> 0.8.0"
+  spec.add_development_dependency "require_all"
+  spec.add_development_dependency "test-model"
+  spec.add_development_dependency "watir-webdriver"
+  spec.add_development_dependency "watir_session"
+  spec.add_development_dependency "activesupport", "~> 3.0"
 end
