@@ -69,7 +69,7 @@ module WatirDrops
       @browser = WatirSession.browser
     end
 
-    def submit_form(model)
+    def fill_form(model)
       intersect = self.class.elements.map(&:keys).flatten & model.keys
       intersect.each do |val|
         self.send("#{val}=", model.send(val))

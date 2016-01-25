@@ -65,7 +65,7 @@ describe WatirDrops do
   end
 
   it 'automatically fills out form' do
-    TestPage.visit.submit_form(RubyModel.new)
+    TestPage.visit.fill_form(RubyModel.new)
     expect(ResultPage.new.message.text).to include('Thank you')
   end
 
