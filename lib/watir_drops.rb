@@ -1,6 +1,5 @@
 require 'watir_session'
-require 'require_all'
 
-require_all 'lib'
+require 'watir_drops/page_object'
 
 include WatirDrops
