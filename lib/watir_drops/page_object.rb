@@ -1,3 +1,4 @@
+require 'watir_session'
 require 'active_support/inflector'
 
 module WatirDrops

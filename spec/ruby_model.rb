@@ -1,6 +1,6 @@
-require 'model'
+require 'watir_model'
 
-class RubyModel < Model
+class RubyModel < WatirModel
   key(:name) { 'Roger' }
   key(:language) { 'Ruby' }
   key(:identity) { true }
