@@ -5,6 +5,9 @@ module WatirDrops
   class PageObject
 
     class << self
+
+      attr_writer :elements
+
       def page_url
         define_method("goto") do |*args|
           browser.goto yield(*args)
@@ -13,6 +16,10 @@ module WatirDrops
 
       def elements
         @elements ||= []
+      end
+
+      def inherited(subclass)
+        subclass.elements = elements.dup
       end
 
       def element(name, &block)
