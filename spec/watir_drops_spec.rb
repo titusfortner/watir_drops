@@ -9,26 +9,11 @@ describe WatirDrops do
 
   it 'navigates to a dynamic url' do
     class TestPage2 < WatirDrops::PageObject
-      page_url { |val| "http://bit.ly/#{val}"}
+      page_url { |val| "http://bit.ly/#{val}" }
     end
 
     TestPage2.visit('watir-webdriver-demo')
-    expect(browser.title).to eql 'Watir-WebDriver Demo'
-    end
-
-  it 'finds an element with browser context' do
-    test_page = TestPage.visit
-    expect(test_page.name).to exist
-  end
-
-  it 'finds an element within the context of another element' do
-    test_page = TestPage.visit
-    expect(test_page.save_button).to exist
-  end
-
-  it 'finds a collection of elements by pluralizing a defined element' do
-    expect(TestPage.visit.save_buttons.size).to be == 1
-    expect(TestPage.visit.required_messages.size).to be == 4
+    expect(@browser.title).to eql 'Watir-WebDriver Demo'
   end
 
   it 'enters text into a textfield based on value it is set equal to' do
