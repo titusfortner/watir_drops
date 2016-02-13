@@ -15,11 +15,11 @@ application information, allowing it to be decoupled from the tests}
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'watir_session', '~> 0.2'
   spec.add_runtime_dependency 'activesupport', '~> 3.0'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'factory_girl'
+  spec.add_development_dependency 'watir_session', '~> 0.2'
 end

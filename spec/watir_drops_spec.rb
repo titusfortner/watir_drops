@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe WatirDrops do
 
+  it 'initializes with WatirSession' do
+    require 'watir_session'
+    @browser.quit
+    WatirDrops::PageObject.browser = nil
+    @browser = WatirSession.before_each
+    expect(@browser).to be_a Watir::Browser
+    expect(WatirDrops::PageObject.browser).to be == @browser
+  end
+
   it 'navigates to a simple url' do
     test_page = TestPage.visit
     expect(test_page.title).to eql 'Watir-WebDriver Demo'

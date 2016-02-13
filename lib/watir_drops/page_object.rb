@@ -1,4 +1,4 @@
-require 'watir_session'
+require 'watir-webdriver'
 require 'active_support/inflector'
 
 module WatirDrops
@@ -89,12 +89,18 @@ module WatirDrops
         new.tap { yield if block_given? }
       end
 
+      def browser=(*args)
+        @@browser = block_given? ? yield(args) : args.first
+      end
+
+      def browser
+        @@browser || (WatirSession.browser if defined? WatirSession)
+      end
+
     end
 
-    attr_reader :browser
-
-    def initialize
-      @browser = WatirSession.browser
+    def browser
+      self.class.browser
     end
 
     def fill_form(model)

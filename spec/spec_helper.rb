@@ -4,7 +4,6 @@ require_relative 'test_page'
 require_relative 'ruby_model'
 
 RSpec.configure do |config|
-  WatirSession.start
 
   config.include FactoryGirl::Syntax::Methods
 
@@ -13,12 +12,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    WatirSession.before_each
-
-    @browser = WatirSession.browser
+    @browser = Watir::Browser.new :chrome
+    WatirDrops::PageObject.browser = @browser
   end
 
   config.after(:each) do
-    WatirSession.after_each
+    @browser.quit
   end
 end
