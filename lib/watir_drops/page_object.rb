@@ -98,6 +98,7 @@ module WatirDrops
     end
 
     def fill_form(model)
+      model = model.to_h unless model.is_a? Hash
       intersect = self.class.element_list & model.keys
       intersect.each do |val|
         self.send("#{val}=", model[val])

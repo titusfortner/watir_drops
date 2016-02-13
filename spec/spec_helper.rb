@@ -6,6 +6,12 @@ require_relative 'ruby_model'
 RSpec.configure do |config|
   WatirSession.start
 
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before(:suite) do
+    FactoryGirl.find_definitions
+  end
+
   config.before(:each) do
     WatirSession.before_each
 
