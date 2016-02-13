@@ -1,4 +1,3 @@
-require 'watir-webdriver'
 require 'active_support/inflector'
 
 module WatirDrops
@@ -110,6 +109,7 @@ module WatirDrops
         self.send("#{val}=", model[val])
       end
     end
+    alias_method :populate_page_with, :fill_form
 
     def title
       browser.title
