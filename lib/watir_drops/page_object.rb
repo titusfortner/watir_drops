@@ -88,18 +88,20 @@ module WatirDrops
         new.tap { yield if block_given? }
       end
 
-      def browser=(*args)
-        @@browser = block_given? ? yield(args) : args.first
+      def browser=(browser_input)
+        @@browser = browser_input
       end
 
       def browser
-        @@browser || (WatirSession.browser if defined? WatirSession)
+        @@browser
       end
 
     end
 
-    def browser
-      self.class.browser
+    attr_reader :browser
+
+    def initialize(browser_input = @@browser)
+      @browser = browser_input
     end
 
     def fill_form(model)
