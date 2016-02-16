@@ -1,5 +1,29 @@
 class TestPage < WatirDrops::PageObject
 
+  element(:form) { browser.form }
+  element(:name) { browser.text_field(id: 'entry_1000000') }
+  element(:language) { browser.select_list(id: 'entry_1000001') }
+  element(:identity) { browser.radio(value: 'Both') }
+  element(:version) { browser.checkbox(value: '1.9.2') }
+  element(:save_button) { form.button(name: 'submit') }
+  element(:required_message) { browser.div(class: 'required-message') }
+
+  element(:div_index) { |indx| browser.div(class: /ss-/, index: indx) }
+  element(:first_element) { browser.element(class: /ss-/) }
+  elements(:all_elements) { browser.elements(class: /ss-/) }
+  element(:first_sub_element) { first_element.element(class: /ss-/) }
+  elements(:all_sub_elements) { first_element.elements(class: /ss-/) }
+
+  page_url { 'http://bit.ly/watir-webdriver-demo' }
+
+  def error_message?
+    required_messages.any?(&:present?)
+  end
+end
+
+class TrainingPage < WatirDrops::TrainingWheels
+  page_url { 'http://bit.ly/watir-webdriver-demo' }
+
   element(:will_not_work, value: 'Both') { browser.element(value: 'both') }
   link(:does_not_match) { browser.div }
 
@@ -25,24 +49,10 @@ class TestPage < WatirDrops::PageObject
   inputs(:all_inputs_block) { first_element.inputs(class: /ss-/) }
 
   div(:div_index) { |indx| browser.div(class: /ss-/, index: indx) }
-
-  form(:form)
-  text_field(:name, id: 'entry_1000000')
-  select_list(:language, id: 'entry_1000001')
-  radio(:identity, value: 'Both')
-  checkbox(:version, value: '1.9.2')
-  button(:save_button, name: 'submit')
-  div(:required_message, class: 'required-message')
-
-  page_url { 'http://bit.ly/watir-webdriver-demo' }
-
-  def error_message?
-    required_messages.any?(&:present?)
-  end
 end
 
 class ResultPage < WatirDrops::PageObject
 
-  div(:message, css: '.ss-resp-message')
+  element(:message) { browser.div(css: '.ss-resp-message') }
 
 end
