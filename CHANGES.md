@@ -1,3 +1,7 @@
+### 0.4.1 (2016-02-15)
+
+* alias fill_form with populate_page_with (page_object gem equivalent)
+
 ### 0.4.0 (2016-02-12)
 
 * define elements & collections with locator hashes as well as blocks
