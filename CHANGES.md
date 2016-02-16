@@ -1,3 +1,7 @@
+### 0.5.0 (2016-02-16)
+
+* split new definition of elements & collections into a sub-class
+
 ### 0.4.1 (2016-02-15)
 
 * alias fill_form with populate_page_with (page_object gem equivalent)
