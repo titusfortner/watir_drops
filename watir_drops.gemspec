@@ -16,11 +16,12 @@ application information, allowing it to be decoupled from the tests}
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activesupport', '~> 3.0'
+  spec.add_runtime_dependency 'watir-webdriver'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'factory_girl'
   spec.add_development_dependency 'data_magic'
-  spec.add_development_dependency 'watir_session', '~> 0.2'
+  spec.add_development_dependency 'watir_model'
 end
