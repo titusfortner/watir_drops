@@ -1,0 +1,6 @@
+dmagic:
+  :name: 'Roger'
+  :language: 'Ruby'
+  :identity: true
+  :version: true
+  :save_button: true

@@ -2,10 +2,12 @@ require 'watir_drops'
 
 require_relative 'test_page'
 require_relative 'ruby_model'
+require 'data_magic'
 
 RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
+  config.include DataMagic
 
   config.before(:suite) do
     FactoryGirl.find_definitions
