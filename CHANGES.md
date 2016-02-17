@@ -1,3 +1,7 @@
+### 0.5.1 (2016-02-17)
+
+* fixed bugs in training wheels 
+
 ### 0.5.0 (2016-02-16)
 
 * split new definition of elements & collections into a sub-class
