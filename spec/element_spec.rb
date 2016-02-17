@@ -147,14 +147,14 @@ describe 'Element Location' do
       it 'finds an element collection from pluralized class method' do
         elements = TestPage.visit.all_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 74
+        expect(elements.size).to be == 37
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
 
       it 'finds an element collection from pluralized instance method' do
         elements = TestPage.visit.first_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 74
+        expect(elements.size).to be == 37
         expect(elements.all? { |el| el.is_a? Watir::Element }).to be true
       end
     end
@@ -163,20 +163,20 @@ describe 'Element Location' do
       it 'finds a generic element' do
         element = TestPage.visit.first_sub_element
         expect(element).to be_a Watir::Element
-        expect(element.text).to start_with('Watir-WebDriver Demo')
+        expect(element.attribute_value('class')).to be == 'ss-header-image-container'
       end
 
       it 'finds an element collection from pluralized class method' do
         elements = TestPage.visit.all_sub_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 73
+        expect(elements.size).to be == 36
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
 
       it 'finds an element collection from pluralized instance method' do
         elements = TestPage.visit.first_sub_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 73
+        expect(elements.size).to be == 36
         expect(elements.all? { |el| el.is_a? Watir::Element }).to be true
       end
     end

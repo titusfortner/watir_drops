@@ -9,10 +9,10 @@ class TestPage < WatirDrops::PageObject
   element(:required_message) { browser.div(class: 'required-message') }
 
   element(:div_index) { |indx| browser.div(class: /ss-/, index: indx) }
-  element(:first_element) { browser.element(class: /ss-/) }
-  elements(:all_elements) { browser.elements(class: /ss-/) }
-  element(:first_sub_element) { first_element.element(class: /ss-/) }
-  elements(:all_sub_elements) { first_element.elements(class: /ss-/) }
+  element(:first_element) { browser.div(class: /ss-/) }
+  elements(:all_elements) { browser.divs(class: /ss-/) }
+  element(:first_sub_element) { first_element.div(class: /ss-/) }
+  elements(:all_sub_elements) { first_element.divs(class: /ss-/) }
 
   page_url { 'http://bit.ly/watir-webdriver-demo' }
 
