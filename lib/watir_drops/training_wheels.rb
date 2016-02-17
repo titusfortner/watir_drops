@@ -5,6 +5,7 @@ module WatirDrops
     class << self
 
       Watir::Container.instance_methods(false).each do |class_method_name|
+        next if class_method_name == :use
         define_method(class_method_name) do |instance_method_name, locator = {}, &block|
           define_method(instance_method_name) do |*args|
             if block.is_a? Proc
@@ -49,7 +50,7 @@ module WatirDrops
               element_type = selector.delete(:tag_name) || 'element'
               element = parent.send(element_type.pluralize, selector)
 
-              return element if element.is_a?(expected_class) || class_method_name == :element
+              return element if element.is_a?(expected_class) || class_method_name.to_s.include?('element')
               raise StandardError, "#{instance_method_name} method was defined as a #{expected_class}, but is a #{element.class}"
             else
               browser.send(class_method_name.to_s.pluralize, locator)
