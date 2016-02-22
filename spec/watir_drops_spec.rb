@@ -43,8 +43,7 @@ describe WatirDrops do
   end
 
   it 'clicks button based on being set equal to a true value' do
-    expect(TestPage.visit.required_message).to_not be_present
-    expect(TestPage.use.error_message?).to be false
+    expect(TestPage.visit.error_message?).to be false
     TestPage.use.save_button = true
     expect(TestPage.use.error_message?).to be true
   end

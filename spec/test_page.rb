@@ -6,7 +6,7 @@ class TestPage < WatirDrops::PageObject
   element(:identity) { browser.radio(value: 'Both') }
   element(:version) { browser.checkbox(value: '1.9.2') }
   element(:save_button) { form.button(name: 'submit') }
-  element(:required_message) { browser.div(class: 'required-message') }
+  elements(:required_messages) { browser.divs(class: 'required-message') }
 
   element(:div_index) { |indx| browser.div(class: /ss-/, index: indx) }
   element(:first_element) { browser.div(class: /ss-/) }
@@ -17,7 +17,7 @@ class TestPage < WatirDrops::PageObject
   page_url { 'http://bit.ly/watir-webdriver-demo' }
 
   def error_message?
-    required_messages.any?(&:present?)
+    required_messages.to_a.any?(&:present?)
   end
 end
 

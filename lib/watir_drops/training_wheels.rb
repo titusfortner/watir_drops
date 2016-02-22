@@ -40,23 +40,6 @@ module WatirDrops
             end
           end
 
-          define_method(instance_method_name.to_s.pluralize) do |*args|
-            if block.is_a? Proc
-              expected_class = browser.send(class_method_name.to_s.pluralize).class
-
-              single_element = self.instance_exec(*args, &block)
-              parent = single_element.instance_variable_get('@parent')
-              selector = single_element.instance_variable_get('@selector')
-              element_type = selector.delete(:tag_name) || 'element'
-              element = parent.send(element_type.pluralize, selector)
-
-              return element if element.is_a?(expected_class) || class_method_name.to_s.include?('element')
-              raise StandardError, "#{instance_method_name} method was defined as a #{expected_class}, but is a #{element.class}"
-            else
-              browser.send(class_method_name.to_s.pluralize, locator)
-            end
-          end
-
           element_list << instance_method_name.to_sym
         end
       end

@@ -34,14 +34,6 @@ module WatirDrops
           self.instance_exec(*args, &block)
         end
 
-        define_method(name.to_s.pluralize) do |*args|
-          single_element = self.instance_exec(*args, &block)
-          parent = single_element.instance_variable_get('@parent')
-          selector = single_element.instance_variable_get('@selector')
-          element_type = selector.delete(:tag_name) || 'element'
-          parent.send(element_type.pluralize, selector)
-        end
-
         define_method("#{name}=") do |val|
           watir_element = self.instance_exec &block
           watir_element.wait_until_present
