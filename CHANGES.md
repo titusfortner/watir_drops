@@ -1,3 +1,7 @@
+### 0.5.2 (2016-02-22)
+
+* removed feature for locating a collection based on pluralizing the element name
+
 ### 0.5.1 (2016-02-17)
 
 * fixed bugs in training wheels 
