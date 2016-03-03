@@ -87,7 +87,7 @@ module WatirDrops
 
     def fill_form(model)
       model = model.to_h if model.is_a? OpenStruct
-      intersect = self.class.element_list & model.keys
+      intersect = self.class.element_list & model.keys.select {|el| !model.send(el).nil?}
       intersect.each do |val|
         self.send("#{val}=", model[val])
       end
