@@ -7,12 +7,15 @@ The intention is to provide a solution that is easy to use and maintain, while s
 ## Usage
 
 Create a class that represents a unique page or modal on your site and have it inherit WatirDrops.
+
 Please see [spec/test_page.rb](spec/test_page.rb) for an example.
 
 Once you have created the representation of the page, your automated test can manipluate the page object.
+
 Please see [spec/watir_drops_spec.rb](spec/watir_drops_spec.rb) for examples.
 
 WatirDrops is written to accept several different ways to model test data. 
+
 Please see [spec/form_filling_spec.rb](spec/form_filling_spec.rb) for examples.
 
 ## Installation
