@@ -38,20 +38,20 @@ module WatirDrops
           watir_element = self.instance_exec &block
           watir_element.wait_until_present
           case watir_element
-            when Watir::Radio
-              watir_element.set if val
-            when Watir::CheckBox
-              val ? watir_element.set : watir_element.clear
-            when Watir::Select
-              watir_element.select val
-            when Watir::Button
-              watir_element.click
+          when Watir::Radio
+            watir_element.set if val
+          when Watir::CheckBox
+            val ? watir_element.set : watir_element.clear
+          when Watir::Select
+            watir_element.select val
+          when Watir::Button
+            watir_element.click
             # TODO - Email & Password types are not set to UserEditable in Watir
-            when Watir::Input
-              watir_element.wd.clear
-              watir_element.send_keys val
-            else
-              watir_element.click if val
+          when Watir::Input
+            watir_element.wd.clear
+            watir_element.send_keys val
+          else
+            watir_element.click if val
           end
         end
 
@@ -86,8 +86,14 @@ module WatirDrops
     end
 
     def fill_form(model)
-      model = model.to_h if model.is_a? OpenStruct
-      intersect = self.class.element_list & model.keys.select {|el| !model.send(el).nil?}
+      intersect = case model
+                  when OpenStruct
+                    self.class.element_list & model.to_h.keys
+                  when Hash
+                    self.class.element_list & model.keys
+                  else
+                    self.class.element_list & model.keys.select { |el| !model.send(el).nil? }
+                  end
       intersect.each do |val|
         self.send("#{val}=", model[val])
       end
