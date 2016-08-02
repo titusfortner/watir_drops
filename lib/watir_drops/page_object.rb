@@ -8,8 +8,12 @@ module WatirDrops
       attr_writer :element_list
 
       def page_url
+        define_method("page_url") do |*args|
+          yield(*args)
+        end
+
         define_method("goto") do |*args|
-          browser.goto yield(*args)
+          browser.goto page_url(*args)
         end
       end
 

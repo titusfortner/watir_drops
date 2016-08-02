@@ -1,3 +1,15 @@
+### 0.5.6 (2016-05-21)
+
+* add instance method for page_url on PageObject
+
+### 0.5.5 (2016-04-22)
+
+* fix bug for filling forms with Hash
+
+### 0.5.4 (2016-04-20)
+
+* don't specify activesupport version
+
 ### 0.5.3 (2016-03-03)
 
 * only attempt fill forms with values defined in model instance
