@@ -51,7 +51,7 @@ module WatirDrops
           when Watir::Button
             watir_element.click
             # TODO - Email & Password types are not set to UserEditable in Watir
-          when Watir::Input
+          when Watir::TextField, Watir::TextArea
             watir_element.wd.clear
             watir_element.send_keys val
           else
