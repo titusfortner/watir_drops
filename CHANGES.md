@@ -1,3 +1,7 @@
+### 0.5.7 (2016-09-21)
+
+* add support for Watir 6.0.0.betas
+
 ### 0.5.6 (2016-05-21)
 
 * add instance method for page_url on PageObject

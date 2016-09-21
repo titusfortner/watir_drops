@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'watir_drops'
-  spec.version       = '0.5.6'
+  spec.version       = '0.5.7'
   spec.authors       = ['Titus Fortner']
   spec.email         = ['titusfortner@gmail.com']
 
@@ -16,7 +16,7 @@ application information, allowing it to be decoupled from the tests}
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activesupport'
-  spec.add_runtime_dependency 'watir-webdriver'
+  spec.add_runtime_dependency 'watir'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
