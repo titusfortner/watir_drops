@@ -1,5 +1,8 @@
 # WatirDrops
 
+[![Gem Version](https://badge.fury.io/rb/watir_drops.svg)](http://badge.fury.io/rb/watir_drops)
+[![Travis Status](https://travis-ci.org/titusfortner/watir_drops.svg?branch=master)](https://travis-ci.org/titusfortner/watir_drops)
+
 This gem leverages the Watir test framework to allow for easy modeling of specific web application information, 
 allowing it to be decoupled from the tests.
 The intention is to provide a solution that is easy to use and maintain, while still providing power and flexibility.
