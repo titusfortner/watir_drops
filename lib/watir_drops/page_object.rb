@@ -2,6 +2,7 @@ require 'active_support/inflector'
 
 module WatirDrops
   class PageObject
+    include Watir::Waitable
 
     class << self
 
@@ -103,12 +104,21 @@ module WatirDrops
       end
     end
 
-    def title
-      browser.title
+    def inspect
+      '#<%s url=%s title=%s>' % [self.class, url.inspect, title.inspect]
+    end
+    alias selector_string inspect
+
+    def method_missing(method, *args, &block)
+      if @browser.respond_to?(method)
+        @browser.send(method, *args, &block)
+      else
+        super
+      end
     end
 
-    def url
-      browser.url
+    def respond_to_missing?(method, _include_all = false)
+      @browser.respond_to?(method) || super
     end
 
   end

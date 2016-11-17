@@ -48,4 +48,12 @@ describe WatirDrops do
     expect(TestPage.use.error_message?).to be true
   end
 
+  describe '#selector_string' do
+    it 'throws custom error message in waits' do
+      test_page = TestPage.visit
+
+      message = /^timed out after 0\.5 seconds, waiting for true condition on #<TestPage url=\S+ title=/
+      expect { test_page.wait_until(timeout: 0.5) { false } }.to raise_exception Watir::Wait::TimeoutError, message
+    end
+  end
 end

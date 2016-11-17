@@ -24,4 +24,4 @@ script:
       mv chromedriver travis-drivers/chromedriver
       chmod +x travis-drivers/chromedriver
 
-      bundle exec rake $RAKE_TASK
+      bundle exec rake

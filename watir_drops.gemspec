@@ -16,7 +16,7 @@ application information, allowing it to be decoupled from the tests}
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activesupport'
-  spec.add_runtime_dependency 'watir'
+  spec.add_runtime_dependency 'watir', '~> 6.0.0'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
