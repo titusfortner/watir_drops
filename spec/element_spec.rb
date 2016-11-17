@@ -32,7 +32,7 @@ describe WatirDrops::TrainingWheels do
     it 'finds a collection of generic elements' do
       elements = TrainingPage.visit.all_elements
       expect(elements).to be_a Watir::ElementCollection
-      expect(elements.size).to be == 74
+      expect(elements.size).to be == 75
       expect(elements.all? { |el| el.is_a? Watir::Element }).to be true
     end
 
@@ -62,7 +62,7 @@ describe WatirDrops::TrainingWheels do
       it 'finds an element collection' do
         elements = TrainingPage.visit.all_elements_block
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 74
+        expect(elements.size).to be == 75
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
     end
@@ -77,7 +77,7 @@ describe WatirDrops::TrainingWheels do
       it 'finds an element collection' do
         elements = TrainingPage.visit.all_sub_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 73
+        expect(elements.size).to be == 74
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
     end
@@ -108,7 +108,7 @@ describe 'Element Location' do
       it 'finds an element collection' do
         elements = TestPage.visit.all_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 37
+        expect(elements.size).to be == 38
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
     end
@@ -123,7 +123,7 @@ describe 'Element Location' do
       it 'finds an element collection' do
         elements = TestPage.visit.all_sub_elements
         expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 36
+        expect(elements.size).to be == 37
         expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
       end
     end
