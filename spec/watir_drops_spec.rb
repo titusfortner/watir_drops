@@ -16,6 +16,10 @@ describe WatirDrops do
     expect(@browser.title).to eql 'Watir-WebDriver Demo'
   end
 
+  it 'raises Exception if wrong number of arguments used for page_url' do
+    expect { TestPage.visit(:foo) }.to raise_error ArgumentError, "#page_url expects 0 arguments, but received 1"
+  end
+
   it 'enters text into a textfield based on value it is set equal to' do
     TestPage.visit.name = 'Roger'
     expect(TestPage.use.name.value).to be == 'Roger'

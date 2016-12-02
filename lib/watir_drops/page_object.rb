@@ -8,12 +8,14 @@ module WatirDrops
 
       attr_writer :element_list
 
-      def page_url
-        define_method("page_url") do |*args|
-          yield(*args)
+      def page_url(&block)
+        define_method(:page_url) do |*args|
+          arity = block.arity
+          return yield(*args) if arity < 0 || arity == args.size
+          raise ArgumentError, "#page_url expects #{arity} arguments, but received #{args.size}"
         end
 
-        define_method("goto") do |*args|
+        define_method(:goto) do |*args|
           browser.goto page_url(*args)
         end
       end
