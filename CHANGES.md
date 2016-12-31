@@ -1,3 +1,7 @@
+### 0.5.8 (2016-12-30)
+
+* fix #fill_form issue for TextArea (thanks Tony Godwin!)
+
 ### 0.5.7 (2016-09-21)
 
 * add support for Watir 6.0.0.betas
