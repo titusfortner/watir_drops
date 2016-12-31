@@ -41,7 +41,6 @@ module WatirDrops
 
         define_method("#{name}=") do |val|
           watir_element = self.instance_exec &block
-          watir_element.wait_until_present
           case watir_element
           when Watir::Radio
             watir_element.set if val
@@ -51,10 +50,8 @@ module WatirDrops
             watir_element.select val
           when Watir::Button
             watir_element.click
-            # TODO - Email & Password types are not set to UserEditable in Watir
           when Watir::TextField, Watir::TextArea
-            watir_element.wd.clear
-            watir_element.send_keys val
+            watir_element.set val if val
           else
             watir_element.click if val
           end
