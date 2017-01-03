@@ -1,7 +1,7 @@
 require 'watir_drops'
 
-require_relative 'test_page'
-require_relative 'ruby_model'
+require_relative 'support/test_page'
+require_relative 'support/ruby_model'
 require 'data_magic'
 
 RSpec.configure do |config|

@@ -33,7 +33,7 @@ describe 'Automatic Form Filling' do
 
   it 'accepts DataMagic' do
     DataMagic.yml_directory = 'spec'
-    DataMagic.load('dm.yml')
+    DataMagic.load('support/dm.yml')
 
     TestPage.visit.fill_form(data_for(:dmagic))
     expect(ResultPage.new.message.text).to include('Thank you')
