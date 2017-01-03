@@ -61,14 +61,7 @@ module WatirDrops
       end
 
       def visit(*args)
-        new.tap do |page|
-          page.goto(*args)
-          yield if block_given?
-        end
-      end
-
-      def use
-        new.tap { yield if block_given? }
+        new.tap { |page| page.goto(*args) }
       end
 
       def browser=(browser_input)

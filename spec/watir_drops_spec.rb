@@ -18,34 +18,34 @@ describe WatirDrops do
 
   it 'enters text into a textfield based on value it is set equal to' do
     TestPage.visit.name = 'Roger'
-    expect(TestPage.use.name.value).to be == 'Roger'
+    expect(TestPage.new.name.value).to be == 'Roger'
   end
 
   it 'selects value from dropdown based on value it is set equal to' do
     TestPage.visit.language = 'Ruby'
-    expect(TestPage.use.language.value).to be == 'Ruby'
+    expect(TestPage.new.language.value).to be == 'Ruby'
   end
 
   it 'selects radio button based being set equal to a true value' do
     TestPage.visit.identity = true
-    expect(TestPage.use.identity).to be_set
+    expect(TestPage.new.identity).to be_set
   end
 
   it 'selects checkbox based on being set equal to a true value' do
     TestPage.visit.version = true
-    expect(TestPage.use.version).to be_set
+    expect(TestPage.new.version).to be_set
   end
 
   it 'deselects checkbox based on being set equal to a true value' do
     TestPage.visit.version = true
-    TestPage.use.version = false
-    expect(TestPage.use.version).to_not be_set
+    TestPage.new.version = false
+    expect(TestPage.new.version).to_not be_set
   end
 
   it 'clicks button based on being set equal to a true value' do
     expect(TestPage.visit.error_message?).to be false
-    TestPage.use.save_button = true
-    expect(TestPage.use.error_message?).to be true
+    TestPage.new.save_button = true
+    expect(TestPage.new.error_message?).to be true
   end
 
   describe '#selector_string' do

@@ -47,5 +47,16 @@ module WatirDrops
 
     alias_method :populate_page_with, :fill_form
 
+    def visit(*args)
+      new.tap do |page|
+        page.goto(*args)
+        yield if block_given?
+      end
+    end
+
+    def use
+      new.tap { yield if block_given? }
+    end
+
   end
 end
