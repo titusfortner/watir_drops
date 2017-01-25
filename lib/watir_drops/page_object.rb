@@ -1,5 +1,3 @@
-require 'active_support/inflector'
-
 module WatirDrops
   class PageObject
     include Watir::Waitable
