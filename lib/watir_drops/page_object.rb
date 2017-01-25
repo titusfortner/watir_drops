@@ -96,7 +96,6 @@ module WatirDrops
 
     def initialize(browser_input = @@browser)
       @browser = browser_input
-      respond_to?(initialze_root)
     end
 
     def fill_form(model)
@@ -122,7 +121,7 @@ module WatirDrops
 
     def on_page?
       if self.respond_to?('page_url')
-        Watir::Wait.until { page_url.gsub(/.*:\/\//i,'') == (@browser.url.gsub(/.*:\/\//i,'')) }
+        Watir::Wait.until { page_url.gsub(/.*:\/\//i,'').gsub(/\/$/i,'') == (@browser.url.gsub(/.*:\/\//i,'').gsub(/\/$/i,'')) }
       end
 
       if self.respond_to?('page_title')
@@ -130,10 +129,10 @@ module WatirDrops
       end
 
       if self.class.required_element_list.any?
-        fail unless self.class.required_element_list.all? { |e| send(e).present? }
+        Watir::Wait.until { self.class.required_element_list.all? { |e| send(e).present? } }
       end
 
-      true # incase we don't hit any if blocks
+      true # incase we don't hit any
     end
 
 
