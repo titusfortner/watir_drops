@@ -10,9 +10,15 @@ module WatirDrops
       attr_writer :required_element_list
 
 
-      def page_url
+      def page_url(required: false)
         define_method("page_url") do |*args|
           yield(*args)
+        end
+
+        if required
+          define_method("page_url_required") do |*args|
+            yield(*args)
+          end
         end
 
         define_method("goto") do |*args|
@@ -20,8 +26,9 @@ module WatirDrops
         end
       end
 
+
       def page_title
-        define_method("page_title") do |args|
+        define_method("page_title") do |*args|
           yield(*args)
         end
       end
@@ -39,16 +46,15 @@ module WatirDrops
         subclass.required_element_list = required_element_list.dup
       end
 
-      def elements(name, required = false, &block)
+      def elements(name, &block)
         define_method(name) do |*args|
           self.instance_exec(*args, &block)
         end
 
         element_list << name.to_sym
-        required_element_list << name.to_sym if required
       end
 
-      def element(name, required=false, &block)
+      def element(name, required: false, &block)
         define_method(name) do |*args|
           self.instance_exec(*args, &block)
         end
@@ -77,7 +83,7 @@ module WatirDrops
       def visit(*args)
         new.tap do |page|
           page.goto(*args)
-          fail "The page is not properly loaded!" unless page.on_page?
+          page.on_page?
         end
       end
 
@@ -120,8 +126,8 @@ module WatirDrops
 
 
     def on_page?
-      if self.respond_to?('page_url')
-        Watir::Wait.until { page_url.gsub(/.*:\/\//i,'').gsub(/\/$/i,'') == (@browser.url.gsub(/.*:\/\//i,'').gsub(/\/$/i,'')) }
+      if self.respond_to?('page_url_required')
+        Watir::Wait.until { page_url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '') == (@browser.url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '')) }
       end
 
       if self.respond_to?('page_title')
