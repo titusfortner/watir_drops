@@ -11,14 +11,10 @@ module WatirDrops
 
 
       def page_url(required: false)
+        @require_url = true if required
+
         define_method("page_url") do |*args|
           yield(*args)
-        end
-
-        if required
-          define_method("page_url_required") do |*args|
-            yield(*args)
-          end
         end
 
         define_method("goto") do |*args|
@@ -27,7 +23,9 @@ module WatirDrops
       end
 
 
-      def page_title
+      def page_title(required: true)
+        @require_title = true if required
+
         define_method("page_title") do |*args|
           yield(*args)
         end
@@ -83,7 +81,7 @@ module WatirDrops
       def visit(*args)
         new.tap do |page|
           page.goto(*args)
-          page.on_page?
+          raise Watir::Exception::Error unless page.on_page?
         end
       end
 
@@ -126,19 +124,21 @@ module WatirDrops
 
 
     def on_page?
-      if self.respond_to?('page_url_required')
-        Watir::Wait.until { page_url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '') == (@browser.url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '')) }
+      begin
+        Watir::Wait.until { page_url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '') == (@browser.url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '')) } if @require_url
+
+        Watir::Wait.until { @browser.title == page_title } if @require_title
+
+        if self.class.required_element_list.any?
+          Watir::Wait.until { self.class.required_element_list.all? { |e| send(e).present? } }
+        end
+
+      rescue
+          false
+      else
+        true
       end
 
-      if self.respond_to?('page_title')
-        Watir::Wait.until { @browser.title == page_title }
-      end
-
-      if self.class.required_element_list.any?
-        Watir::Wait.until { self.class.required_element_list.all? { |e| send(e).present? } }
-      end
-
-      true # incase we don't hit any
     end
 
 

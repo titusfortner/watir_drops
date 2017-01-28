@@ -4,6 +4,8 @@ require_relative 'support/test_page'
 require_relative 'support/ruby_model'
 require 'data_magic'
 
+Watir.default_timeout = 5
+
 RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
