@@ -132,13 +132,11 @@ module WatirDrops
         if self.class.required_element_list.any?
           Watir::Wait.until { self.class.required_element_list.all? { |e| send(e).present? } }
         end
-
       rescue
-          false
+        false
       else
         true
       end
-
     end
 
 
