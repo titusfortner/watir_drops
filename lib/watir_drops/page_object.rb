@@ -2,8 +2,6 @@ module WatirDrops
   class PageObject
     include Watir::Waitable
 
-
-
     class << self
 
       attr_writer :element_list
@@ -80,7 +78,9 @@ module WatirDrops
       def visit(*args)
         new.tap do |page|
           page.goto(*args)
-          raise Selenium::WebDriver::Error::WebDriverError if page.page_verifiable? && !page.on_page?
+          exception = Selenium::WebDriver::Error::WebDriverError
+          message = "Expected to be on #{page.class}, but conditions not met"
+          raise exception, message if page.page_verifiable? && !page.on_page?
         end
       end
 
@@ -103,12 +103,12 @@ module WatirDrops
 
     def fill_form(model)
       intersect = case model
-                    when OpenStruct
-                      self.class.element_list & model.to_h.keys
-                    when Hash
-                      self.class.element_list & model.keys
-                    else
-                      self.class.element_list & model.keys.select { |el| !model.send(el).nil? }
+                  when OpenStruct
+                    self.class.element_list & model.to_h.keys
+                  when Hash
+                    self.class.element_list & model.keys
+                  else
+                    self.class.element_list & model.keys.select { |el| !model.send(el).nil? }
                   end
       intersect.each do |val|
         self.send("#{val}=", model[val])
@@ -123,7 +123,9 @@ module WatirDrops
 
 
     def on_page?
-      raise Selenium::WebDriver::Error::WebDriverError unless page_verifiable?
+      exception = Selenium::WebDriver::Error::WebDriverError
+      message = "Can not verify page without any requirements set"
+      raise exception, message unless page_verifiable?
 
       @browser.wait_until do |browser|
         !self.class.require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
@@ -137,8 +139,7 @@ module WatirDrops
         !self.class.required_element_list.any? || self.class.required_element_list.all? { |e| send(e).present? }
       end
 
-    true
-
+      true
     rescue Watir::Wait::TimeoutError
       false
     end
@@ -156,9 +157,7 @@ module WatirDrops
     end
 
     def page_verifiable?
-
       self.class.require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
-
   end
 end
