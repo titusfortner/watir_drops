@@ -1,3 +1,7 @@
+### 0.7.0 (2017-02-02)
+
+* implement #on_page? verification by url, title or element(s) (thanks Lu Cui)
+
 ### 0.6.1 (2017-02-01)
 
 * fix bug requiring Active Support (thanks Fedor Barannik)
