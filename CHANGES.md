@@ -1,3 +1,8 @@
+### 0.6.1 (2017-02-01)
+
+* fix bug requiring Active Support (thanks Fedor Barannik)
+* fix Travis runs by testing with Chrome instead of Chromium (thanks Fedor Barannik)
+
 ### 0.6.0 (2017-01-04)
 
 * move support for passing blocks into `#visit` from `PageObject` to `TrainingWheels`
