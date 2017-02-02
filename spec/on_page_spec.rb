@@ -1,9 +1,10 @@
 require 'spec_helper'
+Watir.default_timeout = 5
 
 class PageRequired < WatirDrops::PageObject
   page_url(required: true) { 'https://www.google.ca/?gws_rd=ssl' }
-  page_title { 'Google' }
-  element(:search) { browser.text_field(id: 'lst-ib') }
+  # page_title { 'Google' }
+  # element(:search) { browser.text_field(id: 'lst-ib') }
 end
 
 class TitleRequired < WatirDrops::PageObject

@@ -4,10 +4,13 @@ module WatirDrops
   class PageObject
     include Watir::Waitable
 
+
+
     class << self
 
       attr_writer :element_list
       attr_writer :required_element_list
+      attr_reader :require_url
 
 
       def page_url(required: false)
@@ -125,7 +128,7 @@ module WatirDrops
       raise Selenium::WebDriver::Error::WebDriverError unless page_verifiable?
 
       @browser.wait_until do |browser|
-        !@require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
+        !self.class.require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
       end
 
       @browser.wait_until do |browser|
@@ -155,7 +158,8 @@ module WatirDrops
     end
 
     def page_verifiable?
-      @require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
+
+      self.class.require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
 
   end
