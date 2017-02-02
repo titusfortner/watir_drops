@@ -11,7 +11,7 @@ module WatirDrops
 
 
       def page_url(required: false)
-        @require_url = true if required
+        @require_url = required
 
         define_method("page_url") do |*args|
           yield(*args)
@@ -23,9 +23,7 @@ module WatirDrops
       end
 
 
-      def page_title(required: true)
-        @require_title = true if required
-
+      def page_title
         define_method("page_title") do |*args|
           yield(*args)
         end
@@ -60,18 +58,18 @@ module WatirDrops
         define_method("#{name}=") do |val|
           watir_element = self.instance_exec &block
           case watir_element
-            when Watir::Radio
-              watir_element.set if val
-            when Watir::CheckBox
-              val ? watir_element.set : watir_element.clear
-            when Watir::Select
-              watir_element.select val
-            when Watir::Button
-              watir_element.click
-            when Watir::TextField, Watir::TextArea
-              watir_element.set val if val
-            else
-              watir_element.click if val
+          when Watir::Radio
+            watir_element.set if val
+          when Watir::CheckBox
+            val ? watir_element.set : watir_element.clear
+          when Watir::Select
+            watir_element.select val
+          when Watir::Button
+            watir_element.click
+          when Watir::TextField, Watir::TextArea
+            watir_element.set val if val
+          else
+            watir_element.click if val
           end
         end
         element_list << name.to_sym
@@ -81,7 +79,7 @@ module WatirDrops
       def visit(*args)
         new.tap do |page|
           page.goto(*args)
-          raise Watir::Exception::Error unless page.on_page?
+          raise Selenium::WebDriver::Error::WebDriverError if verify_page? && !page.on_page?
         end
       end
 
@@ -124,21 +122,23 @@ module WatirDrops
 
 
     def on_page?
-      begin
-        Watir::Wait.until { page_url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '') == (@browser.url.gsub(/.*:\/\//i, '').gsub(/\/$/i, '')) } if @require_url
-
-        Watir::Wait.until { @browser.title == page_title } if @require_title
-
-        if self.class.required_element_list.any?
-          Watir::Wait.until { self.class.required_element_list.all? { |e| send(e).present? } }
-        end
-      rescue
-        false
-      else
-        true
+      @browser.wait_until do |browser|
+        !@require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
       end
-    end
 
+      @browser.wait_until do |browser|
+        !self.respond_to?(:page_title) || browser.title == page_title
+      end
+
+      @browser.wait_until do |_browser|
+        !self.class.required_element_list.any? || self.class.required_element_list.all? { |e| send(e).present? }
+      end
+
+      true
+
+    rescue Watir::Wait::TimeoutError
+      false
+    end
 
     def method_missing(method, *args, &block)
       if @browser.respond_to?(method)
@@ -150,6 +150,12 @@ module WatirDrops
 
     def respond_to_missing?(method, _include_all = false)
       @browser.respond_to?(method) || super
+    end
+
+    private
+
+    def verify_page?
+      @require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
 
   end
