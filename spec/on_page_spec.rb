@@ -6,7 +6,6 @@ class PageRequired < WatirDrops::PageObject
   element(:search) { browser.text_field(id: 'lst-ib') }
 end
 
-
 class TitleRequired < WatirDrops::PageObject
   page_url { 'https://www.google.ca' }
   page_title { 'Google' }

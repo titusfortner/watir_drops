@@ -79,7 +79,7 @@ module WatirDrops
       def visit(*args)
         new.tap do |page|
           page.goto(*args)
-          raise Selenium::WebDriver::Error::WebDriverError if verify_page? && !page.on_page?
+          raise Selenium::WebDriver::Error::WebDriverError if page.page_verifiable? && !page.on_page?
         end
       end
 
@@ -122,6 +122,8 @@ module WatirDrops
 
 
     def on_page?
+      raise Selenium::WebDriver::Error::WebDriverError unless page_verifiable?
+
       @browser.wait_until do |browser|
         !@require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
       end
@@ -134,7 +136,7 @@ module WatirDrops
         !self.class.required_element_list.any? || self.class.required_element_list.all? { |e| send(e).present? }
       end
 
-      true
+    true
 
     rescue Watir::Wait::TimeoutError
       false
@@ -152,9 +154,7 @@ module WatirDrops
       @browser.respond_to?(method) || super
     end
 
-    private
-
-    def verify_page?
+    def page_verifiable?
       @require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
 
