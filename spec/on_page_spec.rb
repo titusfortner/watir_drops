@@ -67,7 +67,7 @@ module WatirDrops
     context 'when nothing is required' do
       it 'raises exception' do
         none_required = NoneRequired.visit
-        expect { none_required.on_page? }.to eql true
+        expect { none_required.on_page? }.to raise_exception(Selenium::WebDriver::Error::WebDriverError)
       end
     end
   end
