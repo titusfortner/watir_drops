@@ -22,13 +22,6 @@ end
 
 module WatirDrops
   describe 'PageObject#on_page?' do
-    before(:all) do
-      @original_timeout = Watir.default_timeout
-      Watir.default_timeout = 0
-    end
-
-    after(:all) { Watir.default_timeout = @original_timeout}
-
     context 'when url required' do
       it 'returns true on correct page after visit' do
         url_required = URLRequired.visit
@@ -40,10 +33,12 @@ module WatirDrops
         expect(URLRequired.new).to be_on_page
       end
 
-      it 'returns false on incorrect page' do
+      it 'immediately returns false on incorrect page' do
         NoneRequired.visit
         url_required = URLRequired.new
+        start_time = Time.now
         expect(url_required).not_to be_on_page
+        expect(Time.now - start_time).to be < 1
       end
 
       it 'raises exception with an incorrect visit' do
@@ -62,10 +57,12 @@ module WatirDrops
         expect(title_required).to be_on_page
       end
 
-      it 'returns false on incorrect title' do
+      it 'immediately returns false on incorrect title' do
         NoneRequired.visit
         title_required = TitleRequired.new
+        start_time = Time.now
         expect(title_required).not_to be_on_page
+        expect(Time.now - start_time).to be < 1
       end
     end
 
@@ -75,10 +72,12 @@ module WatirDrops
         expect(elements_required).to be_on_page
       end
 
-      it 'returns false on incorrect elements' do
+      it 'immediately returns false on incorrect elements' do
         NoneRequired.visit
         elements_required = ElementsRequired.new
+        start_time = Time.now
         expect(elements_required).not_to be_on_page
+        expect(Time.now - start_time).to be < 1
       end
     end
 

@@ -80,10 +80,15 @@ module WatirDrops
           page.goto(*args)
           exception = Selenium::WebDriver::Error::WebDriverError
           message = "Expected to be on #{page.class}, but conditions not met"
-          raise exception, message if page.page_verifiable? && !page.on_page?
+          if page.page_verifiable?
+            begin
+              page.wait_until(&:on_page?)
+            rescue Watir::Wait::TimeoutError
+              raise exception, message
+            end
+          end
         end
       end
-
 
       def browser=(browser_input)
         @@browser = browser_input
@@ -127,21 +132,19 @@ module WatirDrops
       message = "Can not verify page without any requirements set"
       raise exception, message unless page_verifiable?
 
-      @browser.wait_until do |browser|
-        !self.class.require_url || page_url.gsub("#{URI.parse(page_url).scheme}://", '') == browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
+      if self.class.require_url && page_url.gsub("#{URI.parse(page_url).scheme}://", '') != browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
+        return false
       end
 
-      @browser.wait_until do |browser|
-        !self.respond_to?(:page_title) || browser.title == page_title
+      if self.respond_to?(:page_title) && browser.title != page_title
+        return false
       end
 
-      @browser.wait_until do |_browser|
-        !self.class.required_element_list.any? || self.class.required_element_list.all? { |e| send(e).present? }
+      if !self.class.required_element_list.empty? && self.class.required_element_list.any? { |e| !send(e).present? }
+        return false
       end
 
       true
-    rescue Watir::Wait::TimeoutError
-      false
     end
 
     def method_missing(method, *args, &block)
