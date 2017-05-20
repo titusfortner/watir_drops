@@ -15,12 +15,7 @@ module WatirDrops
         define_method("page_url") do |*args|
           yield(*args)
         end
-
-        define_method("goto") do |*args|
-          browser.goto page_url(*args)
-        end
       end
-
 
       def page_title
         define_method("page_title") do |*args|
@@ -147,8 +142,12 @@ module WatirDrops
       true
     end
 
+    def goto(*args)
+      browser.goto page_url(*args)
+    end
+
     def method_missing(method, *args, &block)
-      if @browser.respond_to?(method)
+      if @browser.respond_to?(method) && method != :page_url
         @browser.send(method, *args, &block)
       else
         super

@@ -16,6 +16,17 @@ describe WatirDrops do
     expect(@browser.title).to eql 'Watir-WebDriver Demo'
   end
 
+  it 'raises exception attempting to navigate to a Page without page_url set' do
+    begin
+      ResultPage.visit
+      fail "Expected exception not raised"
+    rescue NoMethodError => ex
+      expect(ex.message).to include "undefined method `page_url'"
+    rescue
+      fail "Expected exception not raised"
+    end
+  end
+
   it 'enters text into a textfield based on value it is set equal to' do
     TestPage.visit.name = 'Roger'
     expect(TestPage.new.name.value).to be == 'Roger'
