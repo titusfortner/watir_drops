@@ -1,3 +1,7 @@
+### 0.7.1 (2017-05-19)
+
+* `#on_page?` evaluates immediately
+
 ### 0.7.0 (2017-02-02)
 
 * implement #on_page? verification by url, title or element(s) (thanks Lu Cui)
