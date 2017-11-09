@@ -2,12 +2,12 @@ require 'spec_helper'
 Watir.default_timeout = 5
 
 class URLRequired < WatirDrops::PageObject
-  page_url(required: true) { 'https://www.google.com/?gws_rd=ssl' }
+  page_url(required: true) { 'https://the-internet.herokuapp.com/' }
 end
 
 class TitleRequired < WatirDrops::PageObject
-  page_url { 'https://www.google.com/?gws_rd=ssl' }
-  page_title { 'Google' }
+  page_url { 'https://the-internet.herokuapp.com/' }
+  page_title { 'The Internet' }
 end
 
 class ElementsRequired < WatirDrops::PageObject
@@ -29,7 +29,7 @@ module WatirDrops
       end
 
       it 'returns true on correct page without visit call' do
-        @browser.goto 'https://www.google.com/?gws_rd=ssl'
+        @browser.goto 'https://the-internet.herokuapp.com/'
         expect(URLRequired.new).to be_on_page
       end
 
