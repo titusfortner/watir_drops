@@ -2,17 +2,17 @@ require 'spec_helper'
 Watir.default_timeout = 5
 
 class URLRequired < WatirDrops::PageObject
-  page_url(required: true) { 'https://www.google.com/?gws_rd=ssl' }
+  page_url(required: true) { 'http://watir.com/examples/forms_with_input_elements.html' }
 end
 
 class TitleRequired < WatirDrops::PageObject
-  page_url { 'https://www.google.com/?gws_rd=ssl' }
-  page_title { 'Google' }
+  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
+  page_title { 'Forms with input elements' }
 end
 
 class ElementsRequired < WatirDrops::PageObject
-  page_url { 'https://www.google.com/?gws_rd=ssl' }
-  element(:search, required: true) { browser.text_field(id: 'lst-ib') }
+  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
+  element(:search, required: true) { browser.select(id: 'new_user_country') }
 end
 
 class NoneRequired < WatirDrops::PageObject
@@ -29,7 +29,7 @@ module WatirDrops
       end
 
       it 'returns true on correct page without visit call' do
-        @browser.goto 'https://www.google.com/?gws_rd=ssl'
+        @browser.goto 'http://watir.com/examples'
         expect(URLRequired.new).to be_on_page
       end
 
