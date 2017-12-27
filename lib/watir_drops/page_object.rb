@@ -127,8 +127,10 @@ module WatirDrops
       message = "Can not verify page without any requirements set"
       raise exception, message unless page_verifiable?
 
-      if self.class.require_url && page_url.gsub("#{URI.parse(page_url).scheme}://", '') != browser.url.gsub("#{URI.parse(browser.url).scheme}://", '')
-        return false
+      if self.class.require_url
+        expected = page_url.gsub("#{URI.parse(page_url).scheme}://", '').chomp('/')
+        actual = browser.url.gsub("#{URI.parse(browser.url).scheme}://", '').chomp('/')
+        return false unless expected == actual
       end
 
       if self.respond_to?(:page_title) && browser.title != page_title
