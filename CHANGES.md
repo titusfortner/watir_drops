@@ -1,3 +1,7 @@
+### 0.7.2 (2017-12-27)
+
+* `#on_page?` ignores trailing slashes for verification by url
+
 ### 0.7.1 (2017-05-19)
 
 * `#on_page?` evaluates immediately
