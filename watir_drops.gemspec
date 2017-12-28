@@ -23,4 +23,5 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency 'factory_girl'
   spec.add_development_dependency 'data_magic'
   spec.add_development_dependency 'watir_model'
+  spec.add_development_dependency 'webdrivers'
 end

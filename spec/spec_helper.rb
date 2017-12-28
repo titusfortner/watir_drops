@@ -1,4 +1,5 @@
 require 'watir_drops'
+require 'webdrivers'
 
 require_relative 'support/test_page'
 require_relative 'support/ruby_model'
