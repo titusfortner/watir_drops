@@ -2,11 +2,12 @@ require 'watir_model'
 require 'factory_girl'
 
 class TestWatirModel < WatirModel
-  key(:name) { 'Roger' }
-  key(:language) { 'Ruby' }
-  key(:identity) { true }
-  key(:version) { true }
-  key(:save_button) { true }
+  key(:first_name, aliases: [:first]) { Faker::Name.first_name }
+  key(:last_name) { Faker::Name.last_name }
+  key(:email_address) { Faker::Internet.email }
+  key(:email_address_confirm) { email_address }
+  key(:country) { 'Sweden' }
+  key(:occupation) { Faker::Job.title }
 end
 
 class FGModel

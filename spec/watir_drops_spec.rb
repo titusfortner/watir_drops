@@ -4,16 +4,16 @@ describe WatirDrops do
 
   it 'navigates to a simple url' do
     test_page = TestPage.visit
-    expect(test_page.title).to eql 'Watir-WebDriver Demo'
+    expect(test_page.title).to eql 'Forms with input elements'
   end
 
   it 'navigates to a dynamic url' do
     class TestPage2 < WatirDrops::PageObject
-      page_url { |val| "http://bit.ly/#{val}" }
+      page_url { |val| "http://watir.com/examples/#{val}" }
     end
 
-    TestPage2.visit('watir-webdriver-demo')
-    expect(@browser.title).to eql 'Watir-WebDriver Demo'
+    TestPage2.visit('forms_with_input_elements.html')
+    expect(@browser.title).to eql 'Forms with input elements'
   end
 
   it 'raises exception attempting to navigate to a Page without page_url set' do
@@ -28,35 +28,35 @@ describe WatirDrops do
   end
 
   it 'enters text into a textfield based on value it is set equal to' do
-    TestPage.visit.name = 'Roger'
-    expect(TestPage.new.name.value).to be == 'Roger'
+    TestPage.visit.first_name = 'Roger'
+    expect(TestPage.new.first_name.value).to be == 'Roger'
   end
 
   it 'selects value from dropdown based on value it is set equal to' do
-    TestPage.visit.language = 'Ruby'
-    expect(TestPage.new.language.value).to be == 'Ruby'
+    TestPage.visit.country = 'Sweden'
+    expect(TestPage.new.country.value).to be == '3'
   end
 
-  it 'selects radio button based being set equal to a true value' do
+  # Update Radio Set
+  xit 'selects radio button based being set equal to a true value' do
     TestPage.visit.identity = true
     expect(TestPage.new.identity).to be_set
   end
 
   it 'selects checkbox based on being set equal to a true value' do
-    TestPage.visit.version = true
-    expect(TestPage.new.version).to be_set
+    TestPage.visit.cars = true
+    expect(TestPage.new.cars).to be_set
   end
 
   it 'deselects checkbox based on being set equal to a true value' do
-    TestPage.visit.version = true
-    TestPage.new.version = false
-    expect(TestPage.new.version).to_not be_set
+    TestPage.visit.cars = true
+    TestPage.new.cars = false
+    expect(TestPage.new.cars).to_not be_set
   end
 
   it 'clicks button based on being set equal to a true value' do
-    expect(TestPage.visit.error_message?).to be false
-    TestPage.new.save_button = true
-    expect(TestPage.new.error_message?).to be true
+    TestPage.visit.submit = true
+    expect(ResultPage.new.success?).to be true
   end
 
   describe '#selector_string' do

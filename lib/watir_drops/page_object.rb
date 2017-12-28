@@ -101,6 +101,11 @@ module WatirDrops
       @browser = browser_input
     end
 
+    def submit_form(model)
+      fill_form(model)
+      submit.click
+    end
+
     def fill_form(model)
       intersect = case model
                   when OpenStruct

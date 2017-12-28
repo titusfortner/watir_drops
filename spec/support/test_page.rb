@@ -1,28 +1,29 @@
 class TestPage < WatirDrops::PageObject
 
-  element(:form) { browser.form }
-  element(:name) { browser.text_field(id: 'entry_1000000') }
-  element(:language) { browser.select_list(id: 'entry_1000001') }
-  element(:identity) { browser.radio(value: 'Both') }
-  element(:version) { browser.checkbox(value: '1.9.2') }
-  element(:save_button) { form.button(name: 'submit') }
-  elements(:required_messages) { browser.divs(class: 'required-message') }
+  element(:first_name) { browser.text_field(id: 'new_user_first_name') }
+  element(:last_name) { browser.text_field(id: 'new_user_last_name') }
+  element(:email_address) { browser.text_field(id: 'new_user_email') }
+  element(:email_address_confirm)  { browser.text_field(id: 'new_user_email_confirm') }
+  element(:country) { browser.select(id: 'new_user_country')}
+  element(:occupation) { browser.text_field(id: 'new_user_occupation') }
+  element(:submit) { browser.button(id: 'new_user_submit') }
 
-  element(:div_index) { |indx| browser.div(class: /ss-/, index: indx) }
-  element(:first_element) { browser.div(class: /ss-/) }
-  elements(:all_elements) { browser.divs(class: /ss-/) }
-  element(:first_sub_element) { first_element.div(class: /ss-/) }
-  elements(:all_sub_elements) { first_element.divs(class: /ss-/) }
+  element(:cars) { browser.checkbox(id: 'new_user_interests_cars')}
+  element(:div_index) { |indx| browser.div(index: indx) }
+  element(:first_element) { browser.div }
+  elements(:all_elements) { browser.divs }
+  element(:first_sub_element) { div_index(1).div }
+  elements(:all_sub_elements) { div_index(1).divs }
 
-  page_url { 'http://bit.ly/watir-webdriver-demo' }
+  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
 
-  def error_message?
-    required_messages.to_a.any?(&:present?)
-  end
 end
 
 class ResultPage < WatirDrops::PageObject
 
-  element(:message) { browser.div(css: '.ss-resp-message') }
+  element(:message) { browser.div(id: 'messages').div(index: -1) }
 
+  def success?
+    message.text == 'submit'
+  end
 end
