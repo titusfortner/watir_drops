@@ -113,8 +113,7 @@ module WatirDrops
                   when Hash
                     self.class.element_list & model.keys
                   else
-                    model = model_to_hash(model)
-                    self.class.element_list & model.keys.reject { |el| model[el].nil? }
+                    self.class.element_list & model.keys.select { |el| !model.send(el).nil? }
                   end
       intersect.each do |val|
         self.send("#{val}=", model[val])
@@ -124,17 +123,9 @@ module WatirDrops
     def inspect
       '#<%s url=%s title=%s>' % [self.class, url.inspect, title.inspect]
     end
-    alias_method :selector_string, :inspect
 
-    def model_to_hash(model)
-      return model unless model.is_a? WatirModel
-      hash = model.to_hash
-      matching_aliases = self.class.element_list & model.aliases.keys
-      matching_aliases.each do |key|
-        hash[key] = hash.delete(model.aliases[key])
-      end
-      hash
-    end
+    alias selector_string inspect
+
 
     def on_page?
       exception = Selenium::WebDriver::Error::WebDriverError
