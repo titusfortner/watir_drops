@@ -106,15 +106,9 @@ module WatirDrops
       submit.click
     end
 
-    def fill_form(model)
-      intersect = case model
-                  when OpenStruct
-                    self.class.element_list & model.to_h.keys
-                  when Hash
-                    self.class.element_list & model.keys
-                  else
-                    self.class.element_list & model.keys.select { |el| !model.send(el).nil? }
-                  end
+    def fill_form(obj)
+      intersect = self.class.element_list & obj.to_h.keys
+
       intersect.each do |val|
         self.send("#{val}=", model[val])
       end
