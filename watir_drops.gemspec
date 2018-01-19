@@ -20,8 +20,8 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.3'
-  spec.add_development_dependency 'factory_girl'
+  spec.add_development_dependency 'factory_bot'
   spec.add_development_dependency 'data_magic'
-  spec.add_development_dependency 'watir_model'
+  spec.add_development_dependency 'watir_model', '~> 0.5.1'
   spec.add_development_dependency 'webdrivers'
 end

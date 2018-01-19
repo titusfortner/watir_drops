@@ -7,7 +7,7 @@ describe 'Automatic Form Filling' do
     expect(ResultPage.new.success?).to eq true
   end
 
-  it 'accepts FactoryGirl' do
+  it 'accepts FactoryBot' do
     TestPage.visit.submit_form(attributes_for :f_g_model)
     expect(ResultPage.new.success?).to eq true
   end

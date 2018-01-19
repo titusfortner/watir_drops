@@ -1,5 +1,6 @@
 module WatirDrops
   class PageObject
+    extend WatirDrops::ElementHandling
     include Watir::Waitable
 
     class << self
@@ -7,7 +8,6 @@ module WatirDrops
       attr_writer :element_list
       attr_writer :required_element_list
       attr_reader :require_url
-
 
       def page_url(required: false)
         @require_url = required
@@ -21,53 +21,6 @@ module WatirDrops
         define_method("page_title") do |*args|
           yield(*args)
         end
-      end
-
-      def element_list
-        @element_list ||= []
-      end
-
-      def required_element_list
-        @required_element_list ||= []
-      end
-
-      def inherited(subclass)
-        subclass.element_list = element_list.dup
-        subclass.required_element_list = required_element_list.dup
-      end
-
-      def elements(name, &block)
-        define_method(name) do |*args|
-          self.instance_exec(*args, &block)
-        end
-
-        element_list << name.to_sym
-      end
-
-      def element(name, required: false, &block)
-        define_method(name) do |*args|
-          self.instance_exec(*args, &block)
-        end
-
-        define_method("#{name}=") do |val|
-          watir_element = self.instance_exec &block
-          case watir_element
-          when Watir::Radio
-            watir_element.set if val
-          when Watir::CheckBox
-            val ? watir_element.set : watir_element.clear
-          when Watir::Select
-            watir_element.select val
-          when Watir::Button
-            watir_element.click
-          when Watir::TextField, Watir::TextArea
-            watir_element.set val if val
-          else
-            watir_element.click if val
-          end
-        end
-        element_list << name.to_sym
-        required_element_list << name.to_sym if required
       end
 
       def visit(*args)

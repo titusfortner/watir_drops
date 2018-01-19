@@ -7,11 +7,11 @@ require 'data_magic'
 
 RSpec.configure do |config|
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include DataMagic
 
   config.before(:suite) do
-    FactoryGirl.find_definitions
+    FactoryBot.find_definitions
   end
 
   config.before(:each) do

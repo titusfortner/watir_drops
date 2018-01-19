@@ -1,4 +1,5 @@
 class TestPage < WatirDrops::PageObject
+  include WatirDrops::FormHandling
 
   element(:first_name) { browser.text_field(id: 'new_user_first_name') }
   element(:last_name) { browser.text_field(id: 'new_user_last_name') }
