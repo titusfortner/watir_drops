@@ -16,7 +16,7 @@ class TestPage < WatirDrops::PageObject
   element(:first_sub_element) { div_index(1).div }
   elements(:all_sub_elements) { div_index(1).divs }
 
-  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
+  page_url { WatirSpec.url_for("forms_with_input_elements.html") }
 
 end
 

@@ -15,11 +15,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    @browser = Watir::Browser.new :chrome
-    WatirDrops::PageObject.browser = @browser
+    WatirDrops::PageObject.browser = browser
   end
 
-  config.after(:each) do
-    @browser.quit
-  end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'watirspec_helper'
 
 describe 'Automatic Form Filling' do
 

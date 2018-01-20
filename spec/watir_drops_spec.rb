@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'watirspec_helper'
 
 describe WatirDrops do
 
@@ -9,11 +9,11 @@ describe WatirDrops do
 
   it 'navigates to a dynamic url' do
     class TestPage2 < WatirDrops::PageObject
-      page_url { |val| "http://watir.com/examples/#{val}" }
+      page_url { |val| WatirSpec.url_for(val) }
     end
 
     TestPage2.visit('forms_with_input_elements.html')
-    expect(@browser.title).to eql 'Forms with input elements'
+    expect(browser.title).to eql 'Forms with input elements'
   end
 
   it 'raises exception attempting to navigate to a Page without page_url set' do

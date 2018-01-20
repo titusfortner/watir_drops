@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'watirspec_helper'
 
 describe 'Element Location' do
 
@@ -35,7 +35,7 @@ describe 'Element Location' do
 
     it 'finds an element with arguments passed in at runtime' do
       test_page = TestPage.visit
-      expect(test_page.div_index(1)).to be == @browser.divs[1]
+      expect(test_page.div_index(1)).to be == browser.divs[1]
     end
   end
 

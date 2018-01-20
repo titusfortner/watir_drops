@@ -1,22 +1,23 @@
-require 'spec_helper'
-Watir.default_timeout = 5
+require 'watirspec_helper'
+
+Watir.default_timeout = 2
 
 class URLRequired < WatirDrops::PageObject
-  page_url(required: true) { 'http://watir.com/examples/forms_with_input_elements.html' }
+  page_url(required: true) { WatirSpec.url_for("font.html") }
 end
 
 class TitleRequired < WatirDrops::PageObject
-  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
-  page_title { 'Forms with input elements' }
+  page_url { WatirSpec.url_for("font.html") }
+  page_title { 'The font element' }
 end
 
 class ElementsRequired < WatirDrops::PageObject
-  page_url { 'http://watir.com/examples/forms_with_input_elements.html' }
-  element(:search, required: true) { browser.select(id: 'new_user_country') }
+  page_url { WatirSpec.url_for("font.html") }
+  element(:font, required: true) { browser.font(face: 'Helvetica') }
 end
 
 class NoneRequired < WatirDrops::PageObject
-  page_url { 'https://www.example.com' }
+  page_url { WatirSpec.url_for("hover.html") }
   element(:search) { browser.text_field(id: 'lst-ib') }
 end
 
@@ -29,7 +30,7 @@ module WatirDrops
       end
 
       it 'returns true on correct page without visit call' do
-        @browser.goto 'http://watir.com/examples'
+        browser.goto WatirSpec.url_for("font.html")
         expect(URLRequired.new).to be_on_page
       end
 
