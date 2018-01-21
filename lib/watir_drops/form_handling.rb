@@ -22,6 +22,16 @@ module WatirDrops
           end
         end
       end
+
+      def elements(name, &block)
+        super
+        define_method("#{name}=") do |val|
+          collection = self.instance_exec &block
+          super unless collection.is_a? Watir::CheckBoxCollection
+          collection.each { |el| val.include?(el.label.text) ? el.set : el.clear }
+        end
+      end
+
     end
 
     module InstanceMethods
