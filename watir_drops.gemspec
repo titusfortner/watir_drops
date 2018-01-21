@@ -25,4 +25,5 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency 'watir_model', '~> 0.5.8'
   spec.add_development_dependency 'webdrivers'
   spec.add_development_dependency 'carmen'
+  spec.add_development_dependency 'watigiri', '~> 0.3'
 end

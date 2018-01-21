@@ -45,7 +45,7 @@ describe 'Automatic Form Filling' do
 
     it 'for select_list' do
       SimpleForm.visit.state = address.state.to_s
-      expect(SimpleForm.new.state.value).to eq address.state.code
+      expect(SimpleForm.new.state.text).to eq address.state
     end
 
     it 'for radio sets' do

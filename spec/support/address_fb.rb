@@ -15,7 +15,7 @@ FactoryBot.define do
     state "South Carolina"
     zip_code "69345-5915"
     country "United States"
-    birthday Date.parse "1990-07-14"
+    birthday "1990-07-14"
     age "28"
     website "http://heidenreich.info/rosetta"
     phone "1-978-151-2805"
