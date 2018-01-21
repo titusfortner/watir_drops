@@ -2,28 +2,28 @@ require 'watirspec_helper'
 
 describe 'Collection Page' do
 
-  describe "finds index" do
-    it 'WatirModel' do
+  describe "finds address" do
+    it 'with WatirModel' do
       address = AddressModel.new(attributes_for :f_b_model)
-      expect(CollectionPage.visit.find_index(address)).to eq 2
+      expect(CollectionPage.visit.address?(address)).to eq true
     end
 
-    it 'FactoryBot' do
+    it 'with FactoryBot' do
       hash = attributes_for :f_b_model
-      expect(CollectionPage.visit.find_index(hash)).to eq 2
+      expect(CollectionPage.visit.address?(hash)).to eq true
     end
 
-    it 'OpenStruct' do
+    it 'with OpenStruct' do
       hash = attributes_for :f_b_model
       open_struct = OpenStruct.new(hash)
-      expect(CollectionPage.visit.find_index(open_struct)).to eq 2
+      expect(CollectionPage.visit.address?(open_struct)).to eq true
     end
 
-    it 'DataMagic' do
+    it 'with DataMagic' do
       DataMagic.yml_directory = 'spec'
       DataMagic.load('support/dm.yml')
       dm = data_for(:dmagic)
-      expect(CollectionPage.visit.find_index(dm)).to eq 2
+      expect(CollectionPage.visit.address?(dm)).to eq true
     end
   end
 

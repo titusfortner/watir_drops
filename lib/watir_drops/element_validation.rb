@@ -30,10 +30,11 @@ module WatirDrops
         intersect.all? do |key|
           value_found = self.send("#{key}!", hash[key])
           value = obj.class.respond_to?(:convert_type) ? obj.class.convert_type(key, value_found) : value_found
-          puts "#{key} is not valid" unless value
-          value
+          value == hash[key]
         end
       end
+      alias_method :match?, :valid?
+
     end
 
     def self.included(receiver)

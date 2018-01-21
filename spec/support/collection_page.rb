@@ -1,7 +1,11 @@
 class CollectionPage < WatirDrops::PageObject
-  include WatirDrops::FormHandling
+  include WatirDrops::ElementValidation
 
   elements(:address_list) { browser.lis }
+
+  section(:address, AddressSection) { |obj| [browser.lis, obj] }
+  section(:address2, AddressSection) { |obj| [address_list, obj] }
+  section(:address3, AddressSection) { |obj| [browser.li, obj] }
 
   element(:first_name) { |idx| browser.span(data_test: 'first_name', index: idx) }
   element(:last_name) { |idx| browser.span(data_test: 'last_name', index: idx) }
@@ -10,6 +14,10 @@ class CollectionPage < WatirDrops::PageObject
   element(:verify) { |idx| browser.span(data_test: 'verify', index: idx) }
 
   page_url { WatirSpec.url_for("collection_page.html") }
+
+  def address?(address)
+    !find_index(address).nil?
+  end
 
   def associated_value(address)
     verify(find_index(address)).text

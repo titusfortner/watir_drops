@@ -1,6 +1,7 @@
 require 'watir'
 require 'watir_drops/element_handling'
 require 'watir_drops/page_object'
+require 'watir_drops/page_section'
 require 'watir_drops/form_handling'
 require 'watir_drops/element_validation'
 require 'watir_drops/extensions/date_field'

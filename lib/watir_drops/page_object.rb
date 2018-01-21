@@ -5,8 +5,6 @@ module WatirDrops
 
     class << self
 
-      attr_writer :element_list
-      attr_writer :required_element_list
       attr_reader :require_url
 
       def page_url(required: false)
@@ -35,6 +33,13 @@ module WatirDrops
               raise exception, message
             end
           end
+        end
+      end
+
+      def section(name, klass, &block)
+        define_method(name) do |obj|
+          args = self.instance_exec obj, &block
+          klass.new(*args)
         end
       end
 
