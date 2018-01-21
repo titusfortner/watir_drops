@@ -50,29 +50,18 @@ module WatirDrops
 
     attr_reader :browser
 
-    def initialize(browser_input = @@browser)
-      @browser = browser_input
-    end
-
-    def submit_form(model)
-      fill_form(model)
-      submit.click
-    end
-
-    def fill_form(obj)
-      intersect = self.class.element_list & obj.to_h.keys
-
-      intersect.each do |val|
-        self.send("#{val}=", model[val])
-      end
+    def initialize(browser_input = nil)
+      @browser = browser_input || @@browser
     end
 
     def inspect
       '#<%s url=%s title=%s>' % [self.class, url.inspect, title.inspect]
     end
-
     alias selector_string inspect
 
+    def goto(*args)
+      browser.goto page_url(*args)
+    end
 
     def on_page?
       exception = Selenium::WebDriver::Error::WebDriverError
@@ -96,8 +85,8 @@ module WatirDrops
       true
     end
 
-    def goto(*args)
-      browser.goto page_url(*args)
+    def page_verifiable?
+      self.class.require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
 
     def method_missing(method, *args, &block)
@@ -110,10 +99,6 @@ module WatirDrops
 
     def respond_to_missing?(method, _include_all = false)
       @browser.respond_to?(method) || super
-    end
-
-    def page_verifiable?
-      self.class.require_url || self.respond_to?(:page_title) || self.class.required_element_list.any?
     end
   end
 end
