@@ -1,8 +1,9 @@
 require 'watir_drops'
 require 'webdrivers'
 
-require_relative 'support/test_page'
-require_relative 'support/ruby_model'
+require_relative 'support/simple_form'
+require_relative 'support/address_model'
+require_relative 'support/address_fb'
 require 'data_magic'
 
 RSpec.configure do |config|

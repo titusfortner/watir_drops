@@ -1,6 +1,8 @@
 require 'watirspec'
 require 'spec_helper'
 
+WatirSpec.htmls << File.expand_path("../watirspec/html", __FILE__)
+
 WatirSpec.implementation do |watirspec|
   opts = {}
 

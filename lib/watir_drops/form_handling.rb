@@ -7,6 +7,8 @@ module WatirDrops
         define_method("#{name}=") do |val|
           watir_element = self.instance_exec &block
           case watir_element
+          when Watir::RadioSet
+            watir_element.select val
           when Watir::Radio
             watir_element.set if val
           when Watir::CheckBox
@@ -14,9 +16,11 @@ module WatirDrops
           when Watir::Select
             watir_element.select val
           when Watir::Button
-            watir_element.click
+            watir_element.click if val
           when Watir::TextField, Watir::TextArea
             watir_element.set val if val
+          when Watir::DateField, Watir::DateTimeField
+            watir_element.set val
           else
             watir_element.click if val
           end

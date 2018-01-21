@@ -22,6 +22,7 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency 'rspec', '~> 3.3'
   spec.add_development_dependency 'factory_bot'
   spec.add_development_dependency 'data_magic'
-  spec.add_development_dependency 'watir_model', '~> 0.5.1'
+  spec.add_development_dependency 'watir_model', '~> 0.5.8'
   spec.add_development_dependency 'webdrivers'
+  spec.add_development_dependency 'carmen'
 end

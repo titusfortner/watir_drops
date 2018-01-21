@@ -1,6 +1,15 @@
 dmagic:
-  :name: 'Roger'
-  :language: 'Ruby'
-  :identity: true
-  :version: true
-  :save_button: true
+  :first_name: "Grace"
+  :last_name: "Weimann"
+  :street_address: "604 Norma Stravenue"
+  :secondary_address: "Apt. 662"
+  :city: "Port Randy"
+  :state: "South Carolina"
+  :zip_code: "69345-5915"
+  :country: "United States"
+  :birthday: "1990-07-14"
+  :age: "28"
+  :website: "http://heidenreich.info/rosetta"
+  :phone: "1-978-151-2805"
+  :common_interests: ["Climbing", "Reading"]
+  :note: "Recusandae repellat magnam. Consequuntur praesentium occaecati veritatis explicabo ab quis eius."

@@ -6,7 +6,9 @@ module Watir
     #
 
     def set!(date)
-      message = "DateField##{__method__} only accepts instances of Date"
+      message = "DateField##{__callee__} only accepts instances of Date"
+
+      date = Date.parse date if date.is_a?(String)
       raise ArgumentError, message unless date.is_a? Date
 
       date_string = date.strftime("%Y-%m-%d")

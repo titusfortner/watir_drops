@@ -1,42 +1,38 @@
 require 'watirspec_helper'
 
-describe 'Element Location' do
+describe 'Element Handling' do
 
-  context 'with block' do
     context 'with browser context' do
       it 'finds a generic element' do
-        element = TestPage.visit.first_element
+        element = SimpleForm.visit.first_input
         expect(element).to be_a Watir::Element
-        expect(element.id).to eq 'messages'
+        expect(element.id).to eq 'address_first_name'
       end
 
       it 'finds an element collection' do
-        elements = TestPage.visit.all_elements
-        expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 6
-        expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
+        elements = SimpleForm.visit.common_interests
+        expect(elements).to be_a Watir::CheckBoxCollection
+        expect(elements.size).to be == 3
       end
     end
 
     context 'with a nested element context' do
       it 'finds a generic element' do
-        element = TestPage.visit.first_sub_element
-        expect(element).to be_a Watir::Element
-        expect(element.attribute_value('id')).to be == 'hidden_parent'
+        element = SimpleForm.visit.nested_element
+        expect(element).to be_a Watir::Input
+        expect(element.id).to be == 'address_first_name'
       end
 
       it 'finds an element collection' do
-        elements = TestPage.visit.all_sub_elements
-        expect(elements).to be_a Watir::ElementCollection
-        expect(elements.size).to be == 2
-        expect(elements.all? { |div| div.is_a? Watir::Element }).to be true
+        elements = SimpleForm.visit.nested_elements
+        expect(elements).to be_a Watir::InputCollection
+        expect(elements.size).to eq 19
       end
     end
 
     it 'finds an element with arguments passed in at runtime' do
-      test_page = TestPage.visit
-      expect(test_page.div_index(1)).to be == browser.divs[1]
+      simple_form = SimpleForm.visit
+      expect(simple_form.accepts_value(2)).to be == browser.inputs[2]
     end
-  end
 
 end
