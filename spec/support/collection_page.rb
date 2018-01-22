@@ -5,9 +5,9 @@ class CollectionPage < WatirDrops::PageObject
 
   sections(:addresses, AddressSection) { browser.li }
   sections(:addresses2, AddressSection) { browser.lis }
-  section(:address, AddressSection) { |obj| [browser.lis, obj] }
-  section(:address2, AddressSection) { |obj| [address_list, obj] }
-  section(:address3, AddressSection) { |obj| [browser.li, obj] }
+  section(:address, AddressSection) { browser.lis }
+  section(:address2, AddressSection) { address_list }
+  section(:address3, AddressSection) { browser.li }
 
   element(:first_name) { |idx| browser.span(data_test: 'first_name', index: idx) }
   element(:last_name) { |idx| browser.span(data_test: 'last_name', index: idx) }

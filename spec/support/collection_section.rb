@@ -1,5 +1,7 @@
 class SubSection < WatirDrops::PageSection
+  include WatirDrops::ElementValidation
 
+  element(:he_man) { base.strong }
 end
 
 class AddressSection < WatirDrops::PageSection

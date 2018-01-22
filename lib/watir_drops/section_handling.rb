@@ -4,8 +4,8 @@ module WatirDrops
     module ClassMethods
       def section(name, klass, &block)
         define_method(name) do |obj = nil|
-          args = self.instance_exec obj, &block
-          klass.new(*args)
+          el = self.instance_exec &block
+          klass.new(el, obj)
         end
       end
 

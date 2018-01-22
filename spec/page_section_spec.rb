@@ -89,7 +89,7 @@ describe 'Page section' do
       addr = CollectionPage.visit.address(address)
       spans = addr.spanner
       expect(spans.exist?).to eq true
-      expect(spans.text).to eq "First Name:"
+      expect(spans.he_man.text).to eq "First name:"
     end
 
   end
