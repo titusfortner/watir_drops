@@ -1,5 +1,6 @@
 require 'watir'
 require 'watir_drops/element_handling'
+require 'watir_drops/section_handling'
 require 'watir_drops/page_object'
 require 'watir_drops/page_section'
 require 'watir_drops/form_handling'

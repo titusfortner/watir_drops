@@ -35,6 +35,13 @@ module WatirDrops
       end
       alias_method :match?, :valid?
 
+      def build(klass)
+        intersect = self.class.element_list & klass.keys
+
+        klass.convert intersect.each_with_object({}) do |key, hash|
+          hash[key] = self.send("#{key}!")
+        end
+      end
     end
 
     def self.included(receiver)

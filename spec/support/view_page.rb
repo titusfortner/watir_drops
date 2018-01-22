@@ -16,11 +16,6 @@ class ViewPage < WatirDrops::PageObject
   element(:age) { browser.span(data_test: 'age') }
   element(:website) { browser.span(data_test: 'website') }
   element(:phone) { browser.span(data_test: 'phone') }
-
-  element(:climb) { browser.span(data_test: 'interest_climb') }
-  element(:dance) { browser.span(data_test: 'interest_dance') }
-  element(:read) { browser.span(data_test: 'interest_read') }
-
   elements(:interests) { browser.span(data_test: /interest_/) }
 
   element(:note) { browser.span(data_test: 'note') }

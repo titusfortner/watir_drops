@@ -55,7 +55,13 @@ describe 'Page section' do
         expect(addr.first_name.text).to eq address.first_name
       end
 
+    end
 
+    it "finds first section when no object is defined" do
+      addr = CollectionPage.visit.address
+
+      expect(addr.exist?).to eq true
+      expect(addr.first_name.text).to eq "Aaron"
     end
 
     it "does not find address when not present" do
@@ -71,6 +77,19 @@ describe 'Page section' do
     it "gets associated value" do
       address = AddressModel.new(attributes_for :f_b_model)
       expect(CollectionPage.visit.address(address).associated_value).to eq 'three'
+    end
+
+    it "gets index from collection" do
+      as = CollectionPage.visit.addresses
+      expect(as[2].associated_value).to eq 'three'
+    end
+
+    it "nests" do
+      address = AddressModel.new(attributes_for :f_b_model)
+      addr = CollectionPage.visit.address(address)
+      spans = addr.spanner
+      expect(spans.exist?).to eq true
+      expect(spans.text).to eq "First Name:"
     end
 
   end

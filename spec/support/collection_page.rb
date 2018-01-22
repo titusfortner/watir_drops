@@ -3,6 +3,8 @@ class CollectionPage < WatirDrops::PageObject
 
   elements(:address_list) { browser.lis }
 
+  sections(:addresses, AddressSection) { browser.li }
+  sections(:addresses2, AddressSection) { browser.lis }
   section(:address, AddressSection) { |obj| [browser.lis, obj] }
   section(:address2, AddressSection) { |obj| [address_list, obj] }
   section(:address3, AddressSection) { |obj| [browser.li, obj] }

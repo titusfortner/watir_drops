@@ -1,5 +1,11 @@
+class SubSection < WatirDrops::PageSection
+
+end
+
 class AddressSection < WatirDrops::PageSection
   include WatirDrops::ElementValidation
+
+  section(:spanner, SubSection) { base.span }
 
   element(:first_name) { base.span(data_test: 'first_name') }
   element(:last_name) { base.span(data_test: 'last_name') }

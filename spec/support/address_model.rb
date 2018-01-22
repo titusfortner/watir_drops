@@ -1,5 +1,4 @@
 require 'watir_model'
-require 'carmen'
 require 'uri'
 
 class AddressModel < WatirModel

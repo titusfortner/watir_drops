@@ -1,6 +1,8 @@
 module WatirDrops
   class PageObject
     extend WatirDrops::ElementHandling
+    include WatirDrops::SectionHandling
+
     include Watir::Waitable
 
     class << self
@@ -33,13 +35,6 @@ module WatirDrops
               raise exception, message
             end
           end
-        end
-      end
-
-      def section(name, klass, &block)
-        define_method(name) do |obj|
-          args = self.instance_exec obj, &block
-          klass.new(*args)
         end
       end
 

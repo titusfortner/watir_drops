@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'watir_drops'
-  spec.version       = '0.7.2'
+  spec.version       = '1.0.0.beta1'
   spec.authors       = ['Titus Fortner']
   spec.email         = ['titusfortner@gmail.com']
 
@@ -24,6 +24,5 @@ application information, allowing it to be decoupled from the tests}
   spec.add_development_dependency 'data_magic'
   spec.add_development_dependency 'watir_model', '~> 0.5.8'
   spec.add_development_dependency 'webdrivers'
-  spec.add_development_dependency 'carmen'
   spec.add_development_dependency 'watigiri', '~> 0.3'
 end
