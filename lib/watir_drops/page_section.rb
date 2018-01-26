@@ -15,6 +15,10 @@ module WatirDrops
               end
     end
 
+    def browser
+      base.browser
+    end
+
     def base
       return @base if @base
       raise Watir::Exception::UnknownObjectException, "Unable to locate Page Section with #{@el.inspect}"
